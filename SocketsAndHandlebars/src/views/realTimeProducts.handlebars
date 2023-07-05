@@ -1,0 +1,119 @@
+<div class="container p-4">
+  {{!  Titulo }}
+  <div class="title">
+    <h1>Product Manager</h1>
+  </div>
+  {{!  Formulario para ingresar productos }}
+  <section class="form">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-4 w-100">
+        <div class="card">
+          <div class="card-body">
+            <form action="Javascript:void(0)">
+              <div class="form-group p-2">
+                <label for="product_title">Product name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="product_title"
+                  id="product_title"
+                  placeholder="Product..."
+                />
+              </div>
+              <div class="form-group d-flex p-2">
+                <div class="row">
+                  <div class="col">
+                    <label for="product_price">Price ($)</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      placeholder="Price..."
+                      min="1"
+                      pattern="^[0-9]+"
+                      name="product_price"
+                      id="product_price"
+                    />
+                  </div>
+                  <div class="col">
+                    <label for="product_stock">Stock</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      placeholder="Stock..."
+                      min="1"
+                      pattern="^[0-9]+"
+                      name="product_stock"
+                      id="product_stock"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group p-2">
+                <div class="form-group">
+                  <label for="product_category">Category</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Product category..."
+                    name="product_category"
+                    id="product_category"
+                  />
+                </div>
+              </div>
+              <div class="form-group d-flex p-2">
+                <div class="row">
+                  <div class="col">
+                    <label for="product_code">Code</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Code..."
+                      name="product_code"
+                      id="product_code"
+                    />
+                  </div>
+                  <div class="col">
+                    <label for="product_thumbnail">Thumbnails</label>
+                    <input
+                      type="file"
+                      class="form-control"
+                      placeholder="Stock..."
+                      name="product_thumbnail"
+                      id="product_thumbnail"
+                      multiple="multiple"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group p-2">
+                <label for="product_description">Description</label>
+                <textarea
+                  class="form-control"
+                  name="product_description"
+                  id="product_description"
+                  rows="3"
+                  placeholder="Product description..."
+                ></textarea>
+              </div>
+              <div id="submit_button_container" class="form-group p-2 text-center">
+                <button type="submit" id="btn_submit" class="btn btn-success"><b>Cargar Producto</b></button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr />
+  {{!  Seccion productos }}
+  <section class="products">
+    <div class="card-group">
+      <div id="cards" class="col md-4 pt-2 d-flex flex-wrap">
+
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/functions.js"></script>
