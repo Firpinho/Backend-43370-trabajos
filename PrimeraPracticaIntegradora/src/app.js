@@ -6,10 +6,12 @@ require("./daos/mongodb/connection");
 
 const express = require('express');
 const { engine } = require('express-handlebars');
+const { Server } = require("socket.io");
 const morgan = require("morgan");
 const productRouter = require("./routes/products.routes");
 const cartRouter = require("./routes/carts.routes");
 const chatRouter = require("./routes/chat.routes");
+const chatServices = require('./services/message.services')
 
 //  INITIALIZATIONS
 
@@ -35,6 +37,32 @@ app.use("/products", productRouter);
 app.use("/carts", cartRouter);
 app.use("/chat", chatRouter);
 
-app.listen(PORT, () => {
+const httpServer = app.listen(PORT, () => {
   console.log(`[SERVER] Server listening on port :::::: `, PORT);
 });
+
+
+
+const serverSocket = new Server(httpServer);
+
+const homeNamespace = serverSocket.of('/chat')
+
+
+homeNamespace.on('connection', async (socket) => {
+  
+  console.log('[SERVER] New socket on "/chat" ID ::::::', socket.id);
+  console.log('[SERVER] Cliente conectado...');  
+
+  homeNamespace.emit('messages', await chatServices.getAll());
+
+
+  socket.on('products:newMessage', async (data) => {
+    await chatServices.createMessage(data)
+    homeNamespace.emit('messages', await chatServices.getAll())
+  });
+
+  socket.on('products:getAllMessages', async () => {
+    homeNamespace.emit('messages', await chatServices.getAll())
+  });
+
+})

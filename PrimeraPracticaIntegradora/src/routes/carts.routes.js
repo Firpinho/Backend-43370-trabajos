@@ -1,7 +1,7 @@
 const Router = require('express');
 const controllers = require('../controllers/cart.controller')
 
-const router = Router();
+const router = new Router();
 
 router.get('/:id', controllers.getById);
 router.post('/', controllers.create);
