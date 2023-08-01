@@ -1,13 +1,10 @@
 const { getByIdService, createService, addProductService, removeProductService, removeAllProductsService, updateQuantityService } = require('../services/cart.services');
-const {cartCookie} = require('./views.controller')
 
 const getById = async (req, res, next) => {
     try {
-        const cartID = await cartCookie(req);
         const { id } = req.params
         const cart = await getByIdService(id);
-        console.log(cart);
-        res.status(200).render('cart', { data: { cartProducts: cart, cart: cartID } })
+        res.status(200).json(cart)
     } catch (error) {
         next(error)
     }
