@@ -22,6 +22,19 @@ class CartsDaoMongoDB {
     }
   }
 
+  
+  async update(id, data) {
+    try {
+      const cart = await this.Cmodel.findById(id);
+      cart.products = data
+      cart.save()
+      return cart;
+    } catch (error) {
+      return error.message;
+    }
+  }
+
+
   async addProduct(cid, pid) {
     try {
       const cart = await this.Cmodel.findById(cid);

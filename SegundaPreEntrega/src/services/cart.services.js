@@ -23,6 +23,15 @@ const createService = async (obj) => {
   }
 };
 
+const updateCartService = async (id, obj) => {
+  try {
+    const newCart = await CartDao.update(id, obj);
+    return newCart;
+  } catch (error) {
+    return error.message
+  }
+};
+
 const addProductService = async (cid, pid) => {
   try {
     const productAdded = await CartDao.addProduct(cid, pid);
@@ -66,5 +75,6 @@ module.exports = {
     addProductService,
     removeProductService,
     removeAllProductsService,
-    updateQuantityService
+    updateQuantityService,
+    updateCartService
 }
