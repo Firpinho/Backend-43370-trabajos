@@ -1,0 +1,37 @@
+<div class="container p-4">
+  <section class="products">
+    <div class="card-group">
+      <div class="col md-4 pt-2 d-flex flex-wrap">
+
+        {{#each data.products}}
+            <div class="card m-2" id="{{_id}}" style="width: 18rem;">
+              <div class="card-body d-flex flex-column">
+                <h4 class="card-title">{{name}}            {{data.cart}}</h4>
+                <h6 class="card-text">
+                  {{category}}
+                </h6>
+                <p class="card-text pt-2">
+                  {{description}}
+                </p>
+                <div class="bottom mt-auto">
+                  <p class="card-text"><small
+                      class="text-muted"
+                    >{{code}}</small></p>
+                  <p class="card-text"><span class="price">$<b
+                      >{{price}}</b></span>
+                </div>
+              </div>
+              <form action="http://localhost:8080/carts/{{../data.cart}}/product/{{_id}}" method="post">
+                <button type="submit">Agregar al Carrito</button>
+              </form>
+            </div>
+
+            <script>
+                document.getElementById('{{_id}}').addEventListener('click',() => window.location = "http://localhost:8080/views/{{_id}}")  
+            </script>
+        {{/each}}
+      </div>
+    </div>
+  </section>
+</div>
+

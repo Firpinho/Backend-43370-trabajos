@@ -1,0 +1,20 @@
+    <div class="container">
+        <div class="product-list">
+            {{#each data.cartProducts.products}}
+            <div class="product">
+                <h1>{{_id.name}}</h1>
+                <p>Categoría: {{_id.category}}</p>
+                <p>Precio: ${{_id.price}}</p>
+                <p>Código: {{_id.code}}</p>
+                <h2>Cantidad: {{quantity}}</h2>
+                <form action="http://localhost:8080/carts/{{../data.cart}}/product/{{_id._id}}" method="delete">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit">-</button>
+                </form>
+                <form action="http://localhost:8080/carts/{{../data.cart}}/product/{{_id._id}}" method="post">
+                <button type="submit">+</button>
+                </form>
+            </div>
+            {{/each}}
+        </div>
+    </div>
