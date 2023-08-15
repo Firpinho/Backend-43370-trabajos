@@ -1,0 +1,13 @@
+    <div class="container">
+        <div class="product">
+            <h1>{{data.product.name}}</h1>
+            <p>{{data.product.description}}</p>
+            <p>Precio: ${{data.product.price}}</p>
+            <p>Stock: {{data.product.stock}} unidades</p>
+            <p>Código: {{data.product.code}}</p>
+            <p>Categoría: {{data.product.category}}</p>
+            <form action="http://localhost:8080/carts/{{data.cart}}/product/{{data.product._id}}" method="post">
+                <button type="submit">Agregar al Carrito</button>
+            </form>
+        </div>
+    </div>
