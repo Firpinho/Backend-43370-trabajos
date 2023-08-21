@@ -24,13 +24,10 @@ class UserDaoMongoDB {
         }
     }
 
-    async login(mail, password) {
+    async login(mail) {
         try {
             const user = await this.model.findOne({mail: mail});
-            if (user) {
-                if (validatePassword(user, password)) return user
-                else return false
-            }
+            return user
         } catch (error) {
             return {msg: error.message}
         }

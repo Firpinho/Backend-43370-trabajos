@@ -2,6 +2,7 @@ const passport = require('passport');
 const { Strategy : LocalStrategy } = require('passport-local');
 const { UserModel } = require("../daos/mongodb/models/user.model");
 const { UserDaoMongoDB } = require('../daos/mongodb/user.dao')
+const {validatePassword} = require('../utils')
 
 
 const userDao = new UserDaoMongoDB(UserModel);
@@ -26,8 +27,9 @@ const register = async(req, email, password, done ) => {
 
 const login = async(req, email, password, done ) => {
     try {
-        const userLogin = await userDao.login(email, password);
-        if(!userLogin) return done(null, false, {msg: 'User not found.'});
+        const userLogin = await userDao.login(email);
+        if (!userLogin) return done(null, false, {msg: 'Not valid user.'});
+        if(!validatePassword(userLogin, password)) return done(null, false, {msg: 'Not valid user.'});
         return done(null, userLogin);
     } catch (error) {
         console.log(error);
